@@ -1,8 +1,6 @@
 import sys
-import functools
 
 
-@functools.cache
 def satisfied(test, ops, curr, gold=False):
     if curr > test:
         return False
@@ -18,20 +16,17 @@ def satisfied(test, ops, curr, gold=False):
     return p0 or p1 or p2
 
 
-eqs = []
+silver = 0
+gold = 0
 with open(sys.argv[1]) as in_f:
     for line in in_f:
         toks = line.split(':')
+        test = int(toks[0])
         ops = tuple([int(x) for x in toks[1].split()])
-        eqs.append((int(toks[0]), ops))
-
-silver = 0
-gold = 0
-for test, ops in eqs:
-    if satisfied(test, ops[1:], ops[0]):
-        silver += test
-    if satisfied(test, ops[1:], ops[0], gold=True):
-        gold += test
+        if satisfied(test, ops[1:], ops[0]):
+            silver += test
+        if satisfied(test, ops[1:], ops[0], gold=True):
+            gold += test
 
 print(silver)
 print(gold)
