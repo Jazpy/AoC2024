@@ -1,5 +1,6 @@
 # AOC input files
 inputs/*
+test.txt
 
 # Prerequisites
 *.d
