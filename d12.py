@@ -109,8 +109,9 @@ def get_price(mat, region):
     return area * perimeter
 
 
-def silver_solve(mat):
-    ret = 0
+def solve(mat):
+    silver = 0
+    gold = 0
     visited = set()
     regions = []
 
@@ -124,33 +125,15 @@ def silver_solve(mat):
             regions.append(new_region)
 
     for region in regions:
-        ret += get_price(mat, region)
+        silver += get_price(mat, region)
+        gold += get_gold_price(mat, region)
 
-    return ret
-
-
-def gold_solve(mat):
-    ret = 0
-    visited = set()
-    regions = []
-
-    for x in range(len(mat[0])):
-        for y in range(len(mat)):
-            curr_p = vec2(x, y)
-            if curr_p in visited:
-                continue
-            new_region = (mat[y][x], [])
-            color_region(mat, visited, new_region[0], new_region[1], curr_p)
-            regions.append(new_region)
-
-    for region in regions:
-        ret += get_gold_price(mat, region)
-
-    return ret
+    return silver, gold
 
 
 with open(sys.argv[1]) as in_f:
     mat = [x.strip() for x in in_f.readlines()]
 
-print(silver_solve(mat))
-print(gold_solve(mat))
+silver, gold = solve(mat)
+print(silver)
+print(gold)
