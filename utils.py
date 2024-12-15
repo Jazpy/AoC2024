@@ -38,8 +38,8 @@ class Vec2:
     def __repr__(self):
         return f'({self.x}, {self.y})'
 
-    def smart_get(mat, v, modulo=False):
-        return smart_get(mat, v.x, v.y, modulo)
+    def vsmart_get(mat, v, modulo=False):
+        return Vec2.smart_get(mat, v.x, v.y, modulo)
 
     def smart_get(mat, x, y, modulo=False):
         if modulo:
