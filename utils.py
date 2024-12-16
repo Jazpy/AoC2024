@@ -32,6 +32,11 @@ class Vec2:
     def __hash__(self):
         return hash((self.x, self.y))
 
+    def __lt__(self, o):
+        if self.x == o.x:
+            return self.y < o.y
+        return self.x < o.x
+
     def __eq__(self, o):
         return self.x == o.x and self.y == o.y
 
