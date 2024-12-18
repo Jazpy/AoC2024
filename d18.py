@@ -58,8 +58,8 @@ while not q.empty():
             dists[n] = alt
             q.put((alt, n))
 
-gold_walls = set()
-for wall in all_walls:
+gold_walls = silver_walls
+for wall in all_walls[1024:]:
     gold_walls.add(wall)
     f = flood(start, gold_walls)
     if end not in f:
