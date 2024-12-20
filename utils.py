@@ -43,6 +43,19 @@ class Vec2:
     def __repr__(self):
         return f'({self.x}, {self.y})'
 
+    def manhattan_neighbors(self, d):
+        ret = set()
+        offset = Vec2(d, 0)
+        for _ in range(d + 1):
+            ret.add(Vec2(self.x + offset.x, self.y + offset.y))
+            ret.add(Vec2(self.x - offset.x, self.y + offset.y))
+            ret.add(Vec2(self.x + offset.x, self.y - offset.y))
+            ret.add(Vec2(self.x - offset.x, self.y - offset.y))
+            offset.x -= 1
+            offset.y += 1
+
+        return list(ret)
+
     def vsmart_get(mat, v, modulo=False):
         return Vec2.smart_get(mat, v.x, v.y, modulo)
 
